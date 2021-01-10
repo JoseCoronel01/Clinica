@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a11e0fce9a1c45d78109eebb2f3ae608" Name="Diagram1">
+        <EntityTypeShape EntityType="ClinicaModel.documento" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.estado" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.log" Width="1.5" PointX="7.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.notaevolucion" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.paciente" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.pago" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.tipo_documento" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.tratamiento" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaModel.usuarios" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="ClinicaModel.FK_documento_tipo_documento" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicaModel.FK_notaevolucion_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicaModel.FK_notaevolucion_paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicaModel.FK_notaevolucion_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicaModel.FK_tratamiento_paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicaModel.FK_pago_tratamiento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

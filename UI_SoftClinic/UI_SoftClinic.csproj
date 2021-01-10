@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F6466910-AFB4-43F3-BBAB-348C9F079187}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UI_SoftClinic</RootNamespace>
+    <AssemblyName>UI_SoftClinic</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PCL_Comun, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\PCL_Comun.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TextBoxEx">
+      <HintPath>..\Proyectos\TextBoxEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Base.cs" />
+    <Compile Include="Code\ConfigGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAcceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAcceso.designer.cs">
+      <DependentUpon>frmAcceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaPaciente.Designer.cs">
+      <DependentUpon>frmConsultaPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrudDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrudDocumentos.Designer.cs">
+      <DependentUpon>frmCrudDocumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrudTipoDocs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrudTipoDocs.Designer.cs">
+      <DependentUpon>frmCrudTipoDocs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoAltaTratamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoAltaTratamiento.Designer.cs">
+      <DependentUpon>frmListadoAltaTratamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoCrudUsuariosSistema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoCrudUsuariosSistema.designer.cs">
+      <DependentUpon>frmListadoCrudUsuariosSistema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoDocumentos.Designer.cs">
+      <DependentUpon>frmListadoDocumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoPagoCrud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoPagoCrud.Designer.cs">
+      <DependentUpon>frmListadoPagoCrud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoPagos.Designer.cs">
+      <DependentUpon>frmListadoPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoTipoDocs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoTipoDocs.Designer.cs">
+      <DependentUpon>frmListadoTipoDocs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoTratamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoTratamiento.Designer.cs">
+      <DependentUpon>frmListadoTratamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoUsuariosSistema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoUsuariosSistema.designer.cs">
+      <DependentUpon>frmListadoUsuariosSistema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNotaEvolucion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNotaEvolucion.Designer.cs">
+      <DependentUpon>frmNotaEvolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNotaEvolucionListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNotaEvolucionListado.Designer.cs">
+      <DependentUpon>frmNotaEvolucionListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaciente.Designer.cs">
+      <DependentUpon>frmPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistroEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistroEmpresa.Designer.cs">
+      <DependentUpon>frmRegistroEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes.designer.cs">
+      <DependentUpon>frmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportesPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportesPagos.Designer.cs">
+      <DependentUpon>frmReportesPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRespaldarBD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRespaldarBD.Designer.cs">
+      <DependentUpon>frmRespaldarBD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAcceso.resx">
+      <DependentUpon>frmAcceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaPaciente.resx">
+      <DependentUpon>frmConsultaPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrudDocumentos.resx">
+      <DependentUpon>frmCrudDocumentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrudTipoDocs.resx">
+      <DependentUpon>frmCrudTipoDocs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoAltaTratamiento.resx">
+      <DependentUpon>frmListadoAltaTratamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoCrudUsuariosSistema.resx">
+      <DependentUpon>frmListadoCrudUsuariosSistema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoDocumentos.resx">
+      <DependentUpon>frmListadoDocumentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoPagoCrud.resx">
+      <DependentUpon>frmListadoPagoCrud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoPagos.resx">
+      <DependentUpon>frmListadoPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoTipoDocs.resx">
+      <DependentUpon>frmListadoTipoDocs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoTratamiento.resx">
+      <DependentUpon>frmListadoTratamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoUsuariosSistema.resx">
+      <DependentUpon>frmListadoUsuariosSistema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNotaEvolucion.resx">
+      <DependentUpon>frmNotaEvolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNotaEvolucionListado.resx">
+      <DependentUpon>frmNotaEvolucionListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaciente.resx">
+      <DependentUpon>frmPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistroEmpresa.resx">
+      <DependentUpon>frmRegistroEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes.resx">
+      <DependentUpon>frmReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportesPagos.resx">
+      <DependentUpon>frmReportesPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRespaldarBD.resx">
+      <DependentUpon>frmRespaldarBD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PCL_SoftClinic\PCL_SoftClinic.csproj">
+      <Project>{4160ddc1-87b2-41ae-b28d-f3baf441c0aa}</Project>
+      <Name>PCL_SoftClinic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

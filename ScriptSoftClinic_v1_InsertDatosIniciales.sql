@@ -1,0 +1,5 @@
+insert into dbo.usuarios (Usuario,Password,Tipo) values ('admin', 123, 1)
+insert into dbo.estado (Id,Nombre) values (10, 'Satisfactoria')
+insert into dbo.estado (Id,Nombre) values (8, 'Leve')
+insert into dbo.estado (Id,Nombre) values (6, 'Moderada')
+insert into dbo.estado (Id,Nombre) values (4, 'Severa')

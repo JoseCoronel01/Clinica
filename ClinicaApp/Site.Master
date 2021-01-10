@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ClinicaApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %></title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <ul style="list-style-type: none; display: flex;">
+            <li>
+                <asp:Button ID="btnInicio" runat="server" Text="Inicio" OnClick="btnInicio_Click" CssClass="btn btn-primary" />
+            </li>
+            <li>
+                <asp:Button ID="btnPaciente" runat="server" Text="Paciente" OnClick="btnPaciente_Click" CssClass="btn btn-secondary" />
+            </li>
+            <li>
+                <asp:Button ID="btnTratamiento" runat="server" Text="Tratamiento" OnClick="btnTratamiento_Click" CssClass="btn btn-success" />
+            </li>
+            <li>
+                <asp:Button ID="btnPago" runat="server" Text="Pago" OnClick="btnPago_Click" CssClass="btn btn-danger" />
+            </li>
+            <li>
+                <asp:Button ID="btnNotasEvolucion" runat="server" Text="Nota de Evolución" OnClick="btnNotasEvolucion_Click" CssClass="btn btn-primary" />
+            </li>
+            <li>
+                <a href="RPacientes.aspx" target="_blank" class="btn btn-success">Listado de Pacientes</a>
+            </li>
+            <li>
+                <a href="RPagos.aspx" target="_blank" class="btn btn-danger">Listado de Pagos</a>
+            </li>
+            <li>
+                <a href="RNotas.aspx" target="_blank" class="btn btn-primary">Listado de Notas de Evolución</a>
+            </li>
+            <li>
+                <asp:Button ID="btnSalir" runat="server" Text="Salir" OnClick="btnSalir_Click" CssClass="btn btn-success" />
+            </li>
+        </ul>
+        <div class="container body-content">
+            <asp:UpdatePanel ID="up1" runat="server">
+                <ContentTemplate>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %></p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClinicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="Clave" />
+          </Key>
+          <Property Name="Clave" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescripcionBreve" Type="varchar" MaxLength="30" />
+          <Property Name="Etiqueta" Type="varchar" MaxLength="10" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Archivo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Accion" Type="tinyint" Nullable="false" />
+          <Property Name="Valor" Type="varchar(max)" Nullable="false" />
+          <Property Name="Modulo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notaevolucion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Paciente" Type="bigint" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="TelContacto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Responsable" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="LugarResidencia" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Tipo" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="bigint" Nullable="false" />
+          <Property Name="Tratamiento" Type="bigint" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Folio" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Concepto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_documento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tratamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Paciente" Type="bigint" Nullable="false" />
+          <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="FechaSalida" Type="datetime" Nullable="false" />
+          <Property Name="CostoIngreso" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="PlanMensual" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_documento_tipo_documento">
+          <End Role="tipo_documento" Type="Self.tipo_documento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="documento" Type="Self.documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_documento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="documento">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_paciente">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="Usuario" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pago_tratamiento">
+          <End Role="tratamiento" Type="Self.tratamiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tratamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="Tratamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tratamiento_paciente">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tratamiento" Type="Self.tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tratamiento">
+              <PropertyRef Name="Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicaModelStoreContainer">
+          <EntitySet Name="documento" EntityType="Self.documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="log" EntityType="Self.log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notaevolucion" EntityType="Self.notaevolucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_documento" EntityType="Self.tipo_documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tratamiento" EntityType="Self.tratamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_documento_tipo_documento" Association="Self.FK_documento_tipo_documento">
+            <End Role="tipo_documento" EntitySet="tipo_documento" />
+            <End Role="documento" EntitySet="documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_estado" Association="Self.FK_notaevolucion_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_paciente" Association="Self.FK_notaevolucion_paciente">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_usuarios" Association="Self.FK_notaevolucion_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pago_tratamiento" Association="Self.FK_pago_tratamiento">
+            <End Role="tratamiento" EntitySet="tratamiento" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tratamiento_paciente" Association="Self.FK_tratamiento_paciente">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="tratamiento" EntitySet="tratamiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="Clave" />
+          </Key>
+          <Property Name="Clave" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescripcionBreve" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Etiqueta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="tipo_documento" Relationship="Self.FK_documento_tipo_documento" FromRole="documento" ToRole="tipo_documento" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="notaevolucion" Relationship="Self.FK_notaevolucion_estado" FromRole="estado" ToRole="notaevolucion" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Accion" Type="Byte" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notaevolucion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Paciente" Type="Int64" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="estado1" Relationship="Self.FK_notaevolucion_estado" FromRole="notaevolucion" ToRole="estado" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK_notaevolucion_paciente" FromRole="notaevolucion" ToRole="paciente" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_notaevolucion_usuarios" FromRole="notaevolucion" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelContacto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Responsable" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LugarResidencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="notaevolucion" Relationship="Self.FK_notaevolucion_paciente" FromRole="paciente" ToRole="notaevolucion" />
+          <NavigationProperty Name="tratamiento" Relationship="Self.FK_tratamiento_paciente" FromRole="paciente" ToRole="tratamiento" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="Int64" Nullable="false" />
+          <Property Name="Tratamiento" Type="Int64" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Folio" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Concepto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tratamiento1" Relationship="Self.FK_pago_tratamiento" FromRole="pago" ToRole="tratamiento" />
+        </EntityType>
+        <EntityType Name="tipo_documento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="documento" Relationship="Self.FK_documento_tipo_documento" FromRole="tipo_documento" ToRole="documento" />
+        </EntityType>
+        <EntityType Name="tratamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Paciente" Type="Int64" Nullable="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CostoIngreso" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="PlanMensual" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK_tratamiento_paciente" FromRole="tratamiento" ToRole="paciente" />
+          <NavigationProperty Name="pago" Relationship="Self.FK_pago_tratamiento" FromRole="tratamiento" ToRole="pago" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="notaevolucion" Relationship="Self.FK_notaevolucion_usuarios" FromRole="usuarios" ToRole="notaevolucion" />
+        </EntityType>
+        <Association Name="FK_documento_tipo_documento">
+          <End Role="tipo_documento" Type="Self.tipo_documento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="documento" Type="Self.documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_documento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="documento">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_paciente">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notaevolucion_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notaevolucion" Type="Self.notaevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="Usuario" />
+            </Principal>
+            <Dependent Role="notaevolucion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tratamiento_paciente">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tratamiento" Type="Self.tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tratamiento">
+              <PropertyRef Name="Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pago_tratamiento">
+          <End Role="tratamiento" Type="Self.tratamiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tratamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="Tratamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="documento" EntityType="Self.documento" />
+          <EntitySet Name="estado" EntityType="Self.estado" />
+          <EntitySet Name="log" EntityType="Self.log" />
+          <EntitySet Name="notaevolucion" EntityType="Self.notaevolucion" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" />
+          <EntitySet Name="pago" EntityType="Self.pago" />
+          <EntitySet Name="tipo_documento" EntityType="Self.tipo_documento" />
+          <EntitySet Name="tratamiento" EntityType="Self.tratamiento" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <AssociationSet Name="FK_documento_tipo_documento" Association="Self.FK_documento_tipo_documento">
+            <End Role="tipo_documento" EntitySet="tipo_documento" />
+            <End Role="documento" EntitySet="documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_estado" Association="Self.FK_notaevolucion_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_paciente" Association="Self.FK_notaevolucion_paciente">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notaevolucion_usuarios" Association="Self.FK_notaevolucion_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="notaevolucion" EntitySet="notaevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tratamiento_paciente" Association="Self.FK_tratamiento_paciente">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="tratamiento" EntitySet="tratamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pago_tratamiento" Association="Self.FK_pago_tratamiento">
+            <End Role="tratamiento" EntitySet="tratamiento" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicaModelStoreContainer" CdmEntityContainer="ClinicaEntities">
+          <EntitySetMapping Name="documento">
+            <EntityTypeMapping TypeName="ClinicaModel.documento">
+              <MappingFragment StoreEntitySet="documento">
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionBreve" ColumnName="DescripcionBreve" />
+                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="ClinicaModel.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="log">
+            <EntityTypeMapping TypeName="ClinicaModel.log">
+              <MappingFragment StoreEntitySet="log">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Modulo" ColumnName="Modulo" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notaevolucion">
+            <EntityTypeMapping TypeName="ClinicaModel.notaevolucion">
+              <MappingFragment StoreEntitySet="notaevolucion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paciente">
+            <EntityTypeMapping TypeName="ClinicaModel.paciente">
+              <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TelContacto" ColumnName="TelContacto" />
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+                <ScalarProperty Name="LugarResidencia" ColumnName="LugarResidencia" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pago">
+            <EntityTypeMapping TypeName="ClinicaModel.pago">
+              <MappingFragment StoreEntitySet="pago">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_documento">
+            <EntityTypeMapping TypeName="ClinicaModel.tipo_documento">
+              <MappingFragment StoreEntitySet="tipo_documento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tratamiento">
+            <EntityTypeMapping TypeName="ClinicaModel.tratamiento">
+              <MappingFragment StoreEntitySet="tratamiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="CostoIngreso" ColumnName="CostoIngreso" />
+                <ScalarProperty Name="PlanMensual" ColumnName="PlanMensual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="ClinicaModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
