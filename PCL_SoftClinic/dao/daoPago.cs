@@ -32,15 +32,42 @@ namespace PCL_SoftClinic.dao
         {
             int save = 0;
 
+            string sIdPago = "Select top 1 Uid From pago order by Uid desc ";
+        
             string query = "Insert into pago (Uid,Tratamiento,Fecha,Folio,Importe,Concepto) values (@Uid,@Tratamiento,@Fecha,@Folio,@Importe,@Concepto) ";
 
             SqlConnection cxn = daoConexion.GetSql("db");
 
-            SqlCommand cmd = new SqlCommand(query, cxn);
+            SqlCommand cmd1 = new SqlCommand(sIdPago, cxn);
 
-            AddParameters(cmd, str);
+            SqlDataReader lector = cmd1.ExecuteReader();
 
-            save = cmd.ExecuteNonQuery();
+            long idPago = -1;
+
+            if (lector != null && lector.Read())
+            {
+                idPago = int.Parse(lector["Uid"].ToString());
+
+                idPago = idPago + 1;
+
+                str.Uid = idPago;
+
+                SqlCommand cmd = new SqlCommand(query, cxn);
+
+                AddParameters(cmd, str);
+
+                lector.Close();
+
+                save = cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                lector.Close();
+                str.Uid = 1;
+                SqlCommand cmd = new SqlCommand(query, cxn);
+                AddParameters(cmd, str);
+                save = cmd.ExecuteNonQuery();
+            }
 
             return save;
         }
@@ -57,7 +84,30 @@ namespace PCL_SoftClinic.dao
 
         public static long NuevoId()
         {
-            throw new NotImplementedException();
+            long id = 0;
+
+            string query = "Select Uid from pago order by Uid desc";
+
+            SqlConnection cxn = daoConexion.GetSql("db");
+
+            SqlCommand cmd = new SqlCommand(query, cxn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader != null && reader.Read())
+            {
+                id = long.Parse(reader["Uid"].ToString());
+
+                id = id + 1;
+            }
+            else
+            {
+                id = 1;
+            }
+
+            reader.Close();
+
+            return id;
         }
 
         public static strPago GetObject(long idTratamiento)
@@ -86,7 +136,7 @@ namespace PCL_SoftClinic.dao
             if (reader != null && reader.Read())
             {
                 if (obj == null) obj = new strPago();
-                obj.Uid = reader["Uid"].ToString();
+                obj.Uid = long.Parse(reader["Uid"].ToString());
                 obj.Tratamiento = long.Parse(reader["Tratamiento"].ToString());
                 obj.Fecha = (reader["Fecha"] != DBNull.Value) ? DateTime.Parse(reader["Fecha"].ToString()) : DateTime.MinValue;
                 obj.Folio = reader["Folio"].ToString();
@@ -103,7 +153,7 @@ namespace PCL_SoftClinic.dao
                 if (lista == null) lista = new List<strPago>();
                 lista.Add(new strPago()
                 {
-                    Uid = reader["Uid"].ToString(),
+                    Uid = long.Parse(reader["Uid"].ToString()),
                     Tratamiento = long.Parse(reader["Tratamiento"].ToString()),
                     Fecha = (reader["Fecha"] != DBNull.Value) ? DateTime.Parse(reader["Fecha"].ToString()) : DateTime.MinValue,
                     Folio = reader["Folio"].ToString(),

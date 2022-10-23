@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data;
-using PCL_SoftClinic.Reportes;
+using PCL_SoftClinic.Reportes.rpt;
 using PCL_SoftClinic.Reportes.DataSet;
 using PCL_SoftClinic.str;
 
@@ -28,7 +28,7 @@ namespace UI_SoftClinic
                     "WHEN 3 THEN 'PREVENCIÓN DE RECAÍDAS' END) " +
                     "as Tipo " +
                     "from paciente " +
-                    "order by Id asc ", nombreReporte);
+                    "order by Id desc ", nombreReporte);
 
                 crPaciente rep = new crPaciente();
 
@@ -57,6 +57,28 @@ namespace UI_SoftClinic
                     "order by ne.Fecha desc ";
                 ds = CreaXML.GeneraDataSet(query, nombreReporte);
                 rep.SetDataSource(ds);
+                crystalReportViewer1.ReportSource = rep;
+            }
+            else if (nombreReporte == "Colaboradores")
+            {
+                ds = CreaXML.GeneraDataSet("Select * From colaboradores order by Nombre asc", nombreReporte);
+
+                crColaboradores rep = new crColaboradores();
+
+                rep.SetDataSource(ds);
+
+                crystalReportViewer1.ReportSource = rep;
+            }
+            else if (nombreReporte == "ColaboradoresDetalle")
+            {
+                ds = CreaXML.GeneraDataSet("Select cd.*, c.Nombre From colaboradoresDetalle cd " +
+                    "inner join colaboradores c on c.Id = cd.ColaboradorId order by c.Id, cd.FechaEmision desc ",
+                    nombreReporte);
+
+                crColaboradoresD rep = new crColaboradoresD();
+
+                rep.SetDataSource(ds);
+
                 crystalReportViewer1.ReportSource = rep;
             }
         }

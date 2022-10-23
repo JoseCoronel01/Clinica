@@ -2,16 +2,18 @@
 using System.Windows.Forms;
 using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
+using PCL_SoftClinic.BusinessRules;
+using UI_SoftClinic.Code;
 
 namespace UI_SoftClinic
 {
-    public partial class frmListadoPagoCrud : Form
+    public partial class frmListadoPagoCrud : ConfigGeneral
     {
         strPago str = new strPago();
         public long Tratamiento;
-        public DateTime Fecha;
-        public string Folio;
-        public decimal Importe;
+        //public DateTime Fecha;
+        //public string Folio;
+        //public decimal Importe;
 
         public bool Insert { get; set; }
 
@@ -22,20 +24,20 @@ namespace UI_SoftClinic
 
         private void frmListadoPagoCrud_Load(object sender, EventArgs e)
         {
-            txtFactNo.Text = Folio;
+            //txtFactNo.Text = Folio;
+            txtFactNo.Focus();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtFactNo.Text != "" && txtConcepto.Text != "")
+            if (txtFactNo.Text != "" && txtConcepto.Text != "" && dtpFecha.Text != "" && txtImporte.Text != "")
             {
                 if (this.Insert)
                 {
-                    str.Uid = Guid.NewGuid().ToString();
                     str.Tratamiento = Tratamiento;
-                    str.Fecha = Fecha;
+                    str.Fecha = dtpFecha.Value;
                     str.Folio = txtFactNo.Text;
-                    str.Importe = Importe;
+                    str.Importe = (decimal.Parse(txtImporte.Text));
                     str.Concepto = txtConcepto.Text;
 
                     int save = daoPago.Insert(str);
@@ -43,6 +45,11 @@ namespace UI_SoftClinic
                     if (save > 0)
                     {
                         this.Insert = false;
+
+                        BRLog log = new BRLog(DateTime.Now, (byte)ConfigGeneral.TipoLog.Insert,
+                            "Pago realizado con éxito",
+                            this.Text, this.Usuario);
+
                         MessageBox.Show("Pago realizado con éxito", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }

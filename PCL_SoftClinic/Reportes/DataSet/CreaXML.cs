@@ -3,6 +3,7 @@ using dataSet = System.Data;
 using System.IO;
 using System.Data.SqlClient;
 using PCL_SoftClinic.dao;
+using System.Configuration;
 
 namespace PCL_SoftClinic.Reportes.DataSet
 {
@@ -18,7 +19,7 @@ namespace PCL_SoftClinic.Reportes.DataSet
 
             adaptador.Fill(ds);
 
-            string pathWithFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) 
+            string pathWithFile = Path.Combine(ConfigurationManager.AppSettings["Reportes"].ToString())
                 + @"\" + fileName + ".xsd";
 
             if (!File.Exists(pathWithFile))
@@ -36,7 +37,7 @@ namespace PCL_SoftClinic.Reportes.DataSet
 
         public static void GeneraXSD(dataSet.DataSet ds, string nombreReporte)
         {
-            string pathWithFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            string pathWithFile = Path.Combine(ConfigurationManager.AppSettings["Reportes"].ToString())
                 + @"\" + nombreReporte + ".xsd";
 
             if (!File.Exists(pathWithFile))

@@ -12,9 +12,10 @@ namespace PCL_SoftClinic.dao
             int save = 0;
 
             var query = "Insert into tratamiento (" +
-                "Id,Paciente,FechaIngreso,FechaSalida,CostoIngreso," +
-                "PlanMensual) " +
-                "values (@Id,@Paciente,@FechaIngreso,@FechaSalida,@CostoIngreso,@PlanMensual)";
+                "Id,Paciente,FechaIngreso,FechaSalida,CostoIngreso) " +
+                //"PlanMensual) " +
+                "values (@Id,@Paciente,@FechaIngreso,@FechaSalida,@CostoIngreso)";
+            //@PlanMensual
 
             SqlConnection cxn = daoConexion.GetSql("db");
 
@@ -59,7 +60,7 @@ namespace PCL_SoftClinic.dao
                 obj.FechaIngreso = DateTime.Parse(lector["FechaIngreso"].ToString());
                 obj.FechaSalida = DateTime.Parse(lector["FechaSalida"].ToString());
                 obj.CostoIngreso = decimal.Parse(lector["CostoIngreso"].ToString());
-                obj.PlanMensual = decimal.Parse(lector["PlanMensual"].ToString());
+                //obj.PlanMensual = decimal.Parse(lector["PlanMensual"].ToString());
             }
             return obj;
         }
@@ -71,7 +72,7 @@ namespace PCL_SoftClinic.dao
             cmd.Parameters.AddWithValue("@FechaIngreso", str.FechaIngreso);
             cmd.Parameters.AddWithValue("@FechaSalida", str.FechaSalida);
             cmd.Parameters.AddWithValue("@CostoIngreso", str.CostoIngreso);
-            cmd.Parameters.AddWithValue("@PlanMensual", str.PlanMensual);
+            //cmd.Parameters.AddWithValue("@PlanMensual", str.PlanMensual);
         }
 
         public static List<strTratamiento> GetList(long paciente)
@@ -93,6 +94,28 @@ namespace PCL_SoftClinic.dao
             lector.Close();
 
             return lista;
+        }
+
+        public bool Eliminar(long idTratamiento)
+        {
+            var query = "Delete from tratamiento Where Id = @Id ";
+
+            SqlConnection cxn = daoConexion.GetSql("db");
+
+            SqlCommand cmd = new SqlCommand(query, cxn);
+
+            cmd.Parameters.AddWithValue("@Id", idTratamiento);
+
+            int delete = cmd.ExecuteNonQuery();
+
+            if (delete > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static List<strTratamiento> GetList()
@@ -153,7 +176,7 @@ namespace PCL_SoftClinic.dao
                     FechaIngreso = DateTime.Parse(lector["FechaIngreso"].ToString()),
                     FechaSalida = DateTime.Parse(lector["FechaSalida"].ToString()),
                     CostoIngreso = decimal.Parse(lector["CostoIngreso"].ToString()),
-                    PlanMensual = decimal.Parse(lector["PlanMensual"].ToString())
+                    //PlanMensual = decimal.Parse(lector["PlanMensual"].ToString())
                 });
             }
             return lista;

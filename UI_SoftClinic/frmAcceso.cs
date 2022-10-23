@@ -74,6 +74,8 @@ namespace UI_SoftClinic
 
                     this.strUsuario = daoUsuarios.GetObject(str.Usuario);
 
+                    this.GuardaVariableConfiguracion(this.usuario, this.strUsuario.Usuario);
+
                     this.Close();
                 }
             }

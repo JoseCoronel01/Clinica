@@ -9,10 +9,10 @@ namespace PCL_SoftClinic.str
         public DateTime? FechaIngreso { get; set; }
         public DateTime? FechaSalida { get; set; }
         public decimal? CostoIngreso { get; set; }
-        public decimal? PlanMensual { get; set; }
+        //public decimal? PlanMensual { get; set; }
         public override string ToString()
         {
-            return this.FechaIngreso.Value.ToShortDateString() + " " + this.FechaSalida.Value.ToShortDateString();
+            return "Desde " + this.FechaIngreso.Value.ToShortDateString() + " Hasta " + this.FechaSalida.Value.ToShortDateString();
         }
     }
 }

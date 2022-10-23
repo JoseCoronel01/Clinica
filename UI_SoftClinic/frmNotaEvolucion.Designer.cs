@@ -136,7 +136,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(277, 116);
             this.txtDescripcion.TabIndex = 4;
-            this.txtDescripcion.Tecleado = TextBoxEx.CtrlTextBox.Validar.Letras;
+            this.txtDescripcion.Tecleado = TextBoxEx.CtrlTextBox.Validar.Normal;
             // 
             // label2
             // 
@@ -159,7 +159,7 @@
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(277, 20);
             this.txtTitulo.TabIndex = 2;
-            this.txtTitulo.Tecleado = TextBoxEx.CtrlTextBox.Validar.Letras;
+            this.txtTitulo.Tecleado = TextBoxEx.CtrlTextBox.Validar.Normal;
             // 
             // label1
             // 

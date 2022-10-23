@@ -32,7 +32,6 @@
             this.txtBuscar = new TextBoxEx.CtrlTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnPreliminar = new System.Windows.Forms.Button();
-            this.btnEnviar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbPaciente
@@ -49,7 +48,6 @@
             // txtBuscar
             // 
             this.txtBuscar.AplicarColorFoco = true;
-            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBuscar.ColorControlDesenfocado = System.Drawing.Color.White;
             this.txtBuscar.ColorControlEnfocado = System.Drawing.Color.LightCyan;
             this.txtBuscar.Location = new System.Drawing.Point(158, 22);
@@ -72,7 +70,7 @@
             // 
             // btnPreliminar
             // 
-            this.btnPreliminar.Location = new System.Drawing.Point(158, 89);
+            this.btnPreliminar.Location = new System.Drawing.Point(500, 87);
             this.btnPreliminar.Name = "btnPreliminar";
             this.btnPreliminar.Size = new System.Drawing.Size(185, 23);
             this.btnPreliminar.TabIndex = 6;
@@ -80,22 +78,11 @@
             this.btnPreliminar.UseVisualStyleBackColor = true;
             this.btnPreliminar.Click += new System.EventHandler(this.btnPreliminar_Click);
             // 
-            // btnEnviar
-            // 
-            this.btnEnviar.Location = new System.Drawing.Point(355, 89);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(185, 23);
-            this.btnEnviar.TabIndex = 7;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
-            // 
             // frmReportesPagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 122);
-            this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.btnPreliminar);
             this.Controls.Add(this.cbPaciente);
             this.Controls.Add(this.txtBuscar);
@@ -117,6 +104,5 @@
         private TextBoxEx.CtrlTextBox txtBuscar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnPreliminar;
-        private System.Windows.Forms.Button btnEnviar;
     }
 }

@@ -4,7 +4,7 @@ namespace PCL_SoftClinic.str
 {
     public class strPago
     {
-        public string Uid { get; set; }
+        public long Uid { get; set; }
         public long? Tratamiento { get; set; }
         public DateTime? Fecha { get; set; }
         public string Folio { get; set; }

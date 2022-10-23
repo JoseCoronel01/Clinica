@@ -6,10 +6,12 @@ using PCL_Comun.Utilidades;
 using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
 using UI_SoftClinic.Code;
+using PCL_SoftClinic.BusinessRules;
+using UI_SoftClinic.Code;
 
 namespace UI_SoftClinic
 {
-    public partial class frmPaciente : Form
+    public partial class frmPaciente : ConfigGeneral
     {
         public strPaciente str = new strPaciente();
 
@@ -63,9 +65,24 @@ namespace UI_SoftClinic
 
                     if (save > 0)
                     {
-                        this.Insert = false;
+                        BRLog log = new BRLog(DateTime.Now, (byte)TipoLog.Insert,
+                            "Registro guardado",
+                            this.Text, this.Usuario);
+
                         MessageBox.Show("Registro guardado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         limpiarForm();
+
+                        if (MessageBox.Show("¿Desea agregar otro registro nuevo?", "Aviso", 
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == 
+                            DialogResult.Yes)
+                        {
+                            this.Insert = true;
+                        }
+                        else
+                        {
+                            this.Insert = false;
+                            this.Close();
+                        }
                     }
                 }
                 else if (this.ModoEdicion)
@@ -77,6 +94,11 @@ namespace UI_SoftClinic
                     if (save > 0)
                     {
                         this.ModoEdicion = false;
+
+                        BRLog log = new BRLog(DateTime.Now, (byte)TipoLog.Update,
+                            "Registro actualizado",
+                            this.Text, this.Usuario);
+
                         MessageBox.Show("Registro actualizado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }

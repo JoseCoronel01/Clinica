@@ -26,5 +26,23 @@ namespace UI_SoftClinic.Code
         {
             Insert=0,Update=1,Delete=2,Login=3,Select=4,BackUp=5,Modulo=6
         }
+
+        public void GuardaVariableConfiguracion(string nombreVariable, string valor)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            KeyValueConfigurationElement variable = config.AppSettings.Settings[nombreVariable];
+
+            if (variable == null)
+            {
+                variable = new KeyValueConfigurationElement(nombreVariable, valor);
+
+                config.AppSettings.Settings.Add(variable);
+            }
+            else
+                config.AppSettings.Settings[nombreVariable].Value = valor;
+
+            config.Save(ConfigurationSaveMode.Full);
+        }
     }
 }

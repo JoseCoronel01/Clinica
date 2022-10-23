@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.gboxTratamiento = new System.Windows.Forms.GroupBox();
-            this.txtPlanMen = new TextBoxEx.CtrlTextBox();
             this.txtCostoIngreso = new TextBoxEx.CtrlTextBox();
             this.dtpSalida = new System.Windows.Forms.DateTimePicker();
             this.dtpIngreso = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,11 +42,9 @@
             // 
             // gboxTratamiento
             // 
-            this.gboxTratamiento.Controls.Add(this.txtPlanMen);
             this.gboxTratamiento.Controls.Add(this.txtCostoIngreso);
             this.gboxTratamiento.Controls.Add(this.dtpSalida);
             this.gboxTratamiento.Controls.Add(this.dtpIngreso);
-            this.gboxTratamiento.Controls.Add(this.label4);
             this.gboxTratamiento.Controls.Add(this.label3);
             this.gboxTratamiento.Controls.Add(this.label2);
             this.gboxTratamiento.Controls.Add(this.label1);
@@ -58,17 +54,6 @@
             this.gboxTratamiento.TabIndex = 0;
             this.gboxTratamiento.TabStop = false;
             this.gboxTratamiento.Text = "Periodo de pago";
-            // 
-            // txtPlanMen
-            // 
-            this.txtPlanMen.AplicarColorFoco = true;
-            this.txtPlanMen.ColorControlDesenfocado = System.Drawing.Color.White;
-            this.txtPlanMen.ColorControlEnfocado = System.Drawing.Color.LightCyan;
-            this.txtPlanMen.Location = new System.Drawing.Point(182, 187);
-            this.txtPlanMen.Name = "txtPlanMen";
-            this.txtPlanMen.Size = new System.Drawing.Size(117, 20);
-            this.txtPlanMen.TabIndex = 7;
-            this.txtPlanMen.Tecleado = TextBoxEx.CtrlTextBox.Validar.Numeros;
             // 
             // txtCostoIngreso
             // 
@@ -96,16 +81,6 @@
             this.dtpIngreso.Name = "dtpIngreso";
             this.dtpIngreso.Size = new System.Drawing.Size(117, 20);
             this.dtpIngreso.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 182);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(125, 25);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Plan mensual";
             // 
             // label3
             // 
@@ -180,13 +155,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gboxTratamiento;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpSalida;
         private System.Windows.Forms.DateTimePicker dtpIngreso;
-        private TextBoxEx.CtrlTextBox txtPlanMen;
         private TextBoxEx.CtrlTextBox txtCostoIngreso;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;

@@ -100,6 +100,15 @@ namespace UI_SoftClinic
                 BRLog log = new BRLog(DateTime.Now, (byte)TipoLog.Login,
                     "Acceso satisfactorio",
                     this.Text, this.Usuario);
+
+                if (strUsuario.eTipo.OPERADOR == strUsuario.Tipo)
+                {
+                    cambiarContrasena.Visible = true;
+                }
+                else
+                {
+                    cambiarContrasena.Visible = false;
+                }
             }
         }
 
@@ -189,6 +198,23 @@ namespace UI_SoftClinic
                 pictureBox1.Refresh();
                 pictureBox1.Image = System.Drawing.Image.FromFile(this.Fondo);
             }
+        }
+
+        private void cambiarContrasena_Click(object sender, EventArgs e)
+        {
+            frmCambiarContraseña frm = new frmCambiarContraseña();
+            frm.ShowDialog();
+        }
+
+        private void mnucolaboradores_Click(object sender, EventArgs e)
+        {
+            if (strUsuario.eTipo.SUPERVISOR == strUsuario.Tipo)
+            {
+                frmColaboradoresListado frm = new frmColaboradoresListado();
+                frm.ShowDialog();
+            }
+            else
+                MessageBox.Show("Acceso no permitido", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

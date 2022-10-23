@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using PCL_SoftClinic.BusinessRules;
 using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
+using UI_SoftClinic.Code;
 
 namespace UI_SoftClinic
 {
-    public partial class frmListadoTratamiento : Form
+    public partial class frmListadoTratamiento : ConfigGeneral
     {
         strBrPaciente strBr = new strBrPaciente();
 
@@ -73,12 +74,41 @@ namespace UI_SoftClinic
             frm.IdTratamiento = idTratamiento;
             frm.IdPaciente = long.Parse(cbPaciente.SelectedValue.ToString());
             frm.ShowDialog();
+            idTratamiento = -1;
         }
 
         private void gvTratamiento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             idTratamiento = long.Parse(gvTratamiento.Rows[e.RowIndex].Cells["Id"].Value.ToString());
             MessageBox.Show("Tratamiento seleccionado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (idTratamiento == -1)
+            {
+                MessageBox.Show("Seleccione un Tratamiento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (MessageBox.Show("¿Está Seguro(a) de eliminar el tratamiento?", this.Text, 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                daoTratamiento dao = new daoTratamiento();
+                var str = daoTratamiento.GetObject(idTratamiento, long.Parse(cbPaciente.SelectedValue.ToString()));
+                if (dao.Eliminar(idTratamiento))
+                {
+                    BRLog log = 
+                        new BRLog(DateTime.Now, (byte)TipoLog.Delete, 
+                        str.Paciente.Value.ToString(), this.Text, this.Usuario);
+
+                    MessageBox.Show("Tratamiento Eliminado", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Error", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

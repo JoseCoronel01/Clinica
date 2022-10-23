@@ -80,6 +80,36 @@
     <Compile Include="frmAcceso.designer.cs">
       <DependentUpon>frmAcceso.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCambiarContraseña.Designer.cs">
+      <DependentUpon>frmCambiarContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColaboradores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColaboradores.Designer.cs">
+      <DependentUpon>frmColaboradores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColaboradoresListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColaboradoresListado.Designer.cs">
+      <DependentUpon>frmColaboradoresListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColaboradorNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColaboradorNuevo.Designer.cs">
+      <DependentUpon>frmColaboradorNuevo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColaboradorNuevoListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColaboradorNuevoListado.Designer.cs">
+      <DependentUpon>frmColaboradorNuevoListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConsultaPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +225,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAcceso.resx">
       <DependentUpon>frmAcceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCambiarContraseña.resx">
+      <DependentUpon>frmCambiarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColaboradores.resx">
+      <DependentUpon>frmColaboradores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColaboradoresListado.resx">
+      <DependentUpon>frmColaboradoresListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColaboradorNuevo.resx">
+      <DependentUpon>frmColaboradorNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColaboradorNuevoListado.resx">
+      <DependentUpon>frmColaboradorNuevoListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultaPaciente.resx">
       <DependentUpon>frmConsultaPaciente.cs</DependentUpon>

@@ -40,6 +40,25 @@ namespace PCL_SoftClinic.dao
             return save;
         }
 
+        public static int UpdatePass(strUsuario str)
+        {
+            int save = 0;
+
+            string query = "Update Usuarios set Password=@Password where Usuario=@Usuario ";
+
+            SqlConnection cxn = daoConexion.GetSql("db");
+
+            SqlCommand cmd = new SqlCommand(query, cxn);
+
+            cmd.Parameters.AddWithValue("@Usuario", str.Usuario);
+
+            cmd.Parameters.AddWithValue("@Password", str.Password);
+
+            save = cmd.ExecuteNonQuery();
+
+            return save;
+        }
+
         public static int Delete(string Usuario)
         {
             int save = 0;
@@ -108,6 +127,29 @@ namespace PCL_SoftClinic.dao
             SqlCommand cmd = new SqlCommand(query, cxn);
 
             cmd.Parameters.AddWithValue("@Usuario", Usuario);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            obj = LoadObject(reader, obj);
+
+            reader.Close();
+
+            return obj;
+        }
+
+        public static strUsuario GetObject(string Usuario, string Password)
+        {
+            strUsuario obj = null;
+
+            string query = "Select * from Usuarios where Usuario=@Usuario and Password=@Password ";
+
+            SqlConnection cxn = daoConexion.GetSql("db");
+
+            SqlCommand cmd = new SqlCommand(query, cxn);
+
+            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+
+            cmd.Parameters.AddWithValue("@Password", Password);
 
             SqlDataReader reader = cmd.ExecuteReader();
 

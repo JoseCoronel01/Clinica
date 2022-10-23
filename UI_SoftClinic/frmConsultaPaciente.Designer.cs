@@ -278,7 +278,6 @@
             // txtBuscar
             // 
             this.txtBuscar.AplicarColorFoco = true;
-            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBuscar.ColorControlDesenfocado = System.Drawing.Color.White;
             this.txtBuscar.ColorControlEnfocado = System.Drawing.Color.LightCyan;
             this.txtBuscar.Location = new System.Drawing.Point(169, 14);

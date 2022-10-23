@@ -45,7 +45,7 @@ namespace PCL_SoftClinic.BusinessRules
                             Tratamiento = idTratamiento,
                             Fecha = fecha,
                             Folio = "S/N",
-                            Importe = str.PlanMensual / 4,
+                            //Importe = str.PlanMensual / 4,
                             Concepto = ""
                         });
                     }

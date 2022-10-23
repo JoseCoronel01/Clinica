@@ -55,6 +55,8 @@
     <Compile Include="BusinessRules\strBrPaciente.cs" />
     <Compile Include="BusinessRules\strBrPago.cs" />
     <Compile Include="BusinessRules\strBRUsuarioSistema.cs" />
+    <Compile Include="dao\daoColaboradores.cs" />
+    <Compile Include="dao\daoColaboradoresDetalle.cs" />
     <Compile Include="dao\daoConexion.cs" />
     <Compile Include="dao\daoDocumentos.cs" />
     <Compile Include="dao\daoEstado.cs" />
@@ -67,7 +69,39 @@
     <Compile Include="dao\daoTratamiento.cs" />
     <Compile Include="dao\daoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\rpt\crColaboradores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crColaboradores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\rpt\crColaboradoresD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crColaboradoresD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\rpt\crNota.cs">
+      <DependentUpon>crNota.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\rpt\crPaciente.cs">
+      <DependentUpon>crPaciente.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\rpt\crPagos.cs">
+      <DependentUpon>crPagos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\DataSet\CreaXML.cs" />
+    <Compile Include="str\strColaborador.cs" />
+    <Compile Include="str\strColaboradorDetalle.cs" />
     <Compile Include="str\strDocumento.cs" />
     <Compile Include="str\strEstado.cs" />
     <Compile Include="str\strLog.cs" />
@@ -81,6 +115,28 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\rpt\crColaboradores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crColaboradores.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt\crColaboradoresD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crColaboradoresD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt\crNota.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crNota.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt\crPaciente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crPaciente.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt\crPagos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crPagos.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

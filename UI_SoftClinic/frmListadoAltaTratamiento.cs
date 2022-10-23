@@ -3,10 +3,12 @@ using System.Drawing;
 using System.Windows.Forms;
 using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
+using PCL_SoftClinic.BusinessRules;
+using UI_SoftClinic.Code;
 
 namespace UI_SoftClinic
 {
-    public partial class frmListadoAltaTratamiento : Form
+    public partial class frmListadoAltaTratamiento : ConfigGeneral
     {
         strTratamiento str = new strTratamiento();
         public strPaciente strp = new strPaciente();
@@ -26,7 +28,7 @@ namespace UI_SoftClinic
         {
             if (dtpSalida.Value > dtpIngreso.Value)
             {
-                if (txtCostoIngreso.Text != "" && txtPlanMen.Text != "")
+                if (txtCostoIngreso.Text != "") //&& txtPlanMen.Text != "")
                 {
                     str = CargarDatos(str);
 
@@ -35,6 +37,11 @@ namespace UI_SoftClinic
                     if (save > 0)
                     {
                         guardo = true;
+
+                        BRLog log = new BRLog(DateTime.Now, (byte)TipoLog.Insert,
+                            "Registro guardado",
+                            this.Text, this.Usuario);
+
                         MessageBox.Show("Registro guardado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }
@@ -55,7 +62,7 @@ namespace UI_SoftClinic
             str.FechaIngreso = dtpIngreso.Value;
             str.FechaSalida = dtpSalida.Value;
             str.CostoIngreso = decimal.Parse(txtCostoIngreso.Text);
-            str.PlanMensual = decimal.Parse(txtPlanMen.Text);
+            //str.PlanMensual = decimal.Parse(txtPlanMen.Text);
             return str;
         }
 
