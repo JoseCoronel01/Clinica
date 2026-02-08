@@ -121,7 +121,6 @@ namespace UI_SoftClinic
         {
             frmReportes frm = new frmReportes("NotaEvolucion");
             BRLog log = new BRLog(DateTime.Now, (byte)TipoLog.Select, "Select Nota Evolucion", this.Text, this.Usuario);
-            frm.Show();
         }
     }
 }

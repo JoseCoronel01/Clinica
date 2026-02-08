@@ -22,9 +22,12 @@ namespace UI_SoftClinic
 
             List<ElementoComboBox> elementos = new List<ElementoComboBox>();
             var pacientes = daoPaciente.GetList();
-            foreach (var item in pacientes)
-                elementos.Add(new ElementoComboBox() { value = item.Id, text = item.ToString() });
-            cbPaciente.DataSource = elementos;
+            if (pacientes != null)
+            {
+                foreach (var item in pacientes)
+                    elementos.Add(new ElementoComboBox() { value = item.Id, text = item.ToString() });
+                cbPaciente.DataSource = elementos;
+            }
 
             cbEstado.DataSource = daoEstado.GetList();
         }

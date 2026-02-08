@@ -120,7 +120,6 @@ namespace UI_SoftClinic
                     this.Text, this.Usuario);
 
                 frmReportes frm = new frmReportes("Paciente");
-                frm.Show();
             }
             else
                 MessageBox.Show("Acceso no permitido", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -184,19 +183,19 @@ namespace UI_SoftClinic
 
         private void agregarFondoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmRegistroEmpresa frm = new frmRegistroEmpresa();
-            frm.ShowDialog();
-            leerFondo();
+            //frmRegistroEmpresa frm = new frmRegistroEmpresa();
+            //frm.ShowDialog();
+            //leerFondo();
         }
 
         private void leerFondo()
         {
             if (String.IsNullOrEmpty(this.Fondo) == false)
             {
-                pictureBox1.Image = System.Drawing.Image.FromFile(this.Fondo);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Refresh();
-                pictureBox1.Image = System.Drawing.Image.FromFile(this.Fondo);
+                //pictureBox1.Image = System.Drawing.Image.FromFile(this.Fondo);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                //pictureBox1.Refresh();
+                //pictureBox1.Image = System.Drawing.Image.FromFile(this.Fondo);
             }
         }
 

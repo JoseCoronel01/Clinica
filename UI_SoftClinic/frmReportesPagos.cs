@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using PCL_Comun.Utilidades;
-using System.Configuration;
-using PCL_SoftClinic.Reportes.rpt;
 using PCL_SoftClinic.BusinessRules;
 using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
-using System.IO;
-using CrystalDecisions.Shared;
 
 namespace UI_SoftClinic
 {
@@ -39,9 +34,11 @@ namespace UI_SoftClinic
 
         private void btnPreliminar_Click(object sender, EventArgs e)
         {
-            long id = long.Parse(cbPaciente.SelectedValue.ToString());
-            frmReportes frm = new frmReportes("Pagos", id);
-            frm.Show();
+            if (cbPaciente.SelectedValue != null)
+            {
+                long id = long.Parse(cbPaciente.SelectedValue.ToString());
+                frmReportes frm = new frmReportes("Pagos", id);
+            }
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)

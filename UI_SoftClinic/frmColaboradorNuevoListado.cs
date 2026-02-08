@@ -102,7 +102,6 @@ namespace UI_SoftClinic
         private void btnListado_Click(object sender, EventArgs e)
         {
             frmReportes frm = new frmReportes("Colaboradores");
-            frm.Show();
         }
 
         private void gvColaboradores_CellContentClick(object sender, DataGridViewCellEventArgs e)

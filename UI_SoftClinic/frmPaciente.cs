@@ -7,7 +7,6 @@ using PCL_SoftClinic.str;
 using PCL_SoftClinic.dao;
 using UI_SoftClinic.Code;
 using PCL_SoftClinic.BusinessRules;
-using UI_SoftClinic.Code;
 
 namespace UI_SoftClinic
 {
